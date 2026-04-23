@@ -18,7 +18,7 @@ public class Conto {
 	this.saldo = saldoIniziale;
     }
     
-    public boolean preleva(double somma) {
+    public synchronized boolean preleva(double somma) {
 	if (somma <= saldo) { 
 	    try {
 		Thread.sleep(100);
@@ -31,7 +31,7 @@ public class Conto {
 	return false;
     }
     
-    public void versa(double somma) {
+    public synchronized void versa(double somma) {
 	double nuovo_saldo = saldo + somma;
 	try {
 	    Thread.sleep(100);
@@ -42,16 +42,24 @@ public class Conto {
     }
     
     public boolean bonifico(Conto conto, double somma) {
-	if (somma <= saldo) {
-	    try {
-		Thread.sleep(100);
-	    } catch (InterruptedException ex) {
-		Logger.getLogger(Conto.class.getName()).log(Level.SEVERE, null, ex);
+	boolean result = false;
+	//Effettua il sinchronized solo sul prelevo del denaro,
+	//  per evitare i bloccare gli altri thread mentre fa il versamento sull'altro conto
+	synchronized (this)
+	{
+	    if (somma <= saldo) {
+		try {
+		    Thread.sleep(100);
+		} catch (InterruptedException ex) {
+		    Logger.getLogger(Conto.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		saldo = saldo - somma;
+		return true;
 	    }
-	    saldo = saldo - somma;
-	    conto.versa(somma);
-	    return true;
 	}
-	return false;
+	if (result) {
+	    conto.versa(somma);
+	}
+	return result;
     }
 }
