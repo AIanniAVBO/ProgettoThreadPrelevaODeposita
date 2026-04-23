@@ -4,6 +4,9 @@
  */
 package progettothreadprelevaodeposita;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author andre
@@ -17,6 +20,11 @@ public class Conto {
     
     public boolean preleva(double somma) {
 	if (somma <= saldo) { 
+	    try {
+		Thread.sleep(100);
+	    } catch (InterruptedException ex) {
+		Logger.getLogger(Conto.class.getName()).log(Level.SEVERE, null, ex);
+	    }
 	    saldo = saldo - somma;
 	    return true;
 	}
@@ -24,11 +32,22 @@ public class Conto {
     }
     
     public void versa(double somma) {
-	saldo = saldo + somma;
+	double nuovo_saldo = saldo + somma;
+	try {
+	    Thread.sleep(100);
+	} catch (InterruptedException ex) {
+	    Logger.getLogger(Conto.class.getName()).log(Level.SEVERE, null, ex);
+	}
+	saldo = nuovo_saldo;
     }
     
     public boolean bonifico(Conto conto, double somma) {
 	if (somma <= saldo) {
+	    try {
+		Thread.sleep(100);
+	    } catch (InterruptedException ex) {
+		Logger.getLogger(Conto.class.getName()).log(Level.SEVERE, null, ex);
+	    }
 	    saldo = saldo - somma;
 	    conto.versa(somma);
 	    return true;
