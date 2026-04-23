@@ -13,9 +13,19 @@ import java.util.logging.Logger;
  */
 public class Conto {
     private double saldo;
+    private final int id_conto;
     
-    public Conto(double saldoIniziale) {
+    public Conto(double saldoIniziale, int id_conto) {
 	this.saldo = saldoIniziale;
+	this.id_conto = id_conto;
+    }
+
+    public double getSaldo() {
+	return saldo;
+    }
+
+    public int getIDConto() {
+	return id_conto;
     }
     
     public synchronized boolean preleva(double somma) {

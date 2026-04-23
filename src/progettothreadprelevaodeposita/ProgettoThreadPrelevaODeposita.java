@@ -18,8 +18,8 @@ public class ProgettoThreadPrelevaODeposita {
      */
     public static void main(String[] args) {
 	//Crea due conti con 10000 come saldo iniziale
-	Conto conto1 = new Conto(10000);
-	Conto conto2 = new Conto(10000);
+	Conto conto1 = new Conto(10000, 1);
+	Conto conto2 = new Conto(10000, 2);
 	//Crea un array di operatori
 	Operatore[] ops = new Operatore[6];
 	//Crea 3 operatori che lavorano sul conto1 e fanno bonifici sul conto2

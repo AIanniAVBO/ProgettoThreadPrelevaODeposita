@@ -38,20 +38,20 @@ public class Operatore extends Thread{
 		case 0:
 		    //Versa una somma casuale
 		    conto.versa(somma);
-			System.out.println("Sono il thread " + tID + " ho versato la somma " + somma + " sul mio conto");
+			System.out.println("Sono il thread " + tID + " ho versato la somma " + somma + " sul mio conto con id: " + conto.getIDConto());
 		    break;
 		case 1:
 		    if (conto.preleva(somma)) {
-			System.out.println("Sono il thread " + tID + " ho prelevato la somma " + somma + " dal mio conto");
+			System.out.println("Sono il thread " + tID + " ho prelevato la somma " + somma + " dal mio conto con id: " + conto.getIDConto());
 		    } else {
-			System.out.println("Sono il thread " + tID + " non ho potuto prelevare la somma " + somma + " dal mio conto");
+			System.out.println("Sono il thread " + tID + " non ho potuto prelevare la somma " + somma + " dal mio conto con id: " + conto.getIDConto());
 		    }
 		    break;
 		case 2:
 		    if (conto.bonifico(altroConto, somma)) {
-			System.out.println("Sono il thread " + tID + " ho versato la somma " + somma + " sull'altro conto");
+			System.out.println("Sono il thread " + tID + " ho versato la somma " + somma + " sull'altro conto con id: " + altroConto.getIDConto());
 		    } else {
-			System.out.println("Sono il thread " + tID + " non ho potuto versare la somma " + somma + " sull'altro conto");
+			System.out.println("Sono il thread " + tID + " non ho potuto versare la somma " + somma + " sull'altro conto con id: " + altroConto.getIDConto());
 		    }
 		    break;
 	    }
