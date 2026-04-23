@@ -16,14 +16,23 @@ public class Conto {
     }
     
     public boolean preleva(double somma) {
+	if (somma <= saldo) { 
+	    saldo = saldo - somma;
+	    return true;
+	}
 	return false;
     }
     
     public void versa(double somma) {
-	
+	saldo = saldo + somma;
     }
     
     public boolean bonifico(Conto conto, double somma) {
+	if (somma <= saldo) {
+	    saldo = saldo - somma;
+	    conto.versa(somma);
+	    return true;
+	}
 	return false;
     }
 }
